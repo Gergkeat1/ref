@@ -1,7 +1,6 @@
 const express = require('express')
 const router = express.Router()
 const crypto = require('crypto');
-const cookieParser = require('cookie-parser');
 const app = express();
 
 router.route('/')
@@ -43,4 +42,4 @@ router.route('/')
         });
     })
 
-module.exports = router
+module.exports = router ;
