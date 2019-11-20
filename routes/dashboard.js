@@ -9,9 +9,4 @@ router.route('/')
         res.render('pages/dashboard')    
     })
  
-router.route('/logout')
-    .get((req, res, next) => { 
-        res.redirect('/login')    
-    })    
- 
 module.exports = router

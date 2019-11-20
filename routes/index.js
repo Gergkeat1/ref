@@ -4,7 +4,8 @@ const router = express.Router()
 router.get('/', function(req, res, next) {
     res.locals.pageData = {
         title:'Home Page'
-    }   
+    }
+    require('../connection/con');
     res.render('pages/index')
 })
  
