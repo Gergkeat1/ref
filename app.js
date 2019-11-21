@@ -72,7 +72,7 @@ app.use(sess({
 app.use('/', indexRouter);
 app.use('/login', loginRouter);
 app.use('/register', registerRouter);
-app.use('/me', dashboardRouter);
+app.use('/dashboard', dashboardRouter);
 
 // middlewear
 app.use(function (req, res, next) {

@@ -27,11 +27,14 @@ router.route('/')
 
         const user = req.body.user,
             pass = req.body.pass
-            ;
-        const secret = 'abcdefg';
-        const encpass = crypto.createHmac('sha1', secret).update(pass).digest('hex');
-        const sql = "INSERT INTO user (user, pass) VALUES ('" + user + "', '" + encpass + "')";
-        console.log("has =",encpass);
+        ;
+
+        var mykey = crypto.createCipher('aes-128-cbc', 'abc');
+        var mystr = mykey.update(pass, 'utf8', 'hex')
+        mystr += mykey.final('hex');
+
+        const sql = "INSERT INTO user (user, pass) VALUES ('" + user + "', '" + mystr + "')";
+        console.log("has =",mystr);
         conn.query(sql, [user, pass], function (err, data) {
           if (err) {
             console.log("Error inserted into db", err);

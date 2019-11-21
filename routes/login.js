@@ -1,7 +1,6 @@
 const express = require('express');
 const router = express.Router();
 const crypto = require('crypto');
-const mongoose = require('mongoose');
 const app = express();
 
 
@@ -27,21 +26,28 @@ router.route('/')
 
         const conn = require('../connection/con');
         const user = req.body.user
-        opass = req.body.pass;
+              opass = req.body.pass
+        ;
         console.log("User is is =" + user);
         const sql = "SELECT * FROM user WHERE user = '" + user + "'";
         console.log("sql is =" + sql);
         conn.query(sql, function (err, result) {
 
-            result.forEach(function(data) {
+            result.forEach(function (data) {
 
-                if (data.pass.validPassword('123')) {
-                    console.log("login suk");
+                var mykey = crypto.createDecipher('aes-128-cbc', 'abc');
+                var mystr = mykey.update(data.pass, 'hex', 'utf8')
+                mystr += mykey.final('utf8');
+                
+                if (mystr == opass) {
+                    console.log("Login Successfully");
+                    var username = data.user ;
+                    res.redirect('/dashboard?user=' + username);
                 }
                 else {
-                    console.log("login don't suk");
+                    console.log("Login don't Successfully");
                 };
-                
+
             });
 
         });
