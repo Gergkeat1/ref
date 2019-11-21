@@ -8,12 +8,8 @@ var expressLayouts = require('express-ejs-layouts');
 var engine = require('ejs-locals');
 var createError = require('http-errors'); // เรียกใช้งาน http-errors module
 var port = 3000; // port 
-var flash = require('connect-flash'); // เรียกใช้งาน connect-flash
-var crypto = require('crypto'); // เรียกใช้งาน crypto
 var passport = require('passport'); // เรียกใช้งาน passport
-var LocalStrategy = require('passport-local').Strategy; // เรียกใช้งาน passport-local.Strategy
 var sess = require('express-session'); // เรียกใช้งาน express-session
-var Store = require('express-session').Store; // เรียกใช้งาน express-session.Store
 var BetterMemoryStore = require('session-memory-store')(sess);
 
 var app = express();
@@ -23,6 +19,7 @@ var indexRouter = require('./routes/index');
 var loginRouter = require('./routes/login');
 var registerRouter = require('./routes/register');
 var dashboardRouter = require('./routes/dashboard');
+var showRouter = require('./routes/show');
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -73,6 +70,7 @@ app.use('/', indexRouter);
 app.use('/login', loginRouter);
 app.use('/register', registerRouter);
 app.use('/dashboard', dashboardRouter);
+app.use('/show', showRouter);
 
 // middlewear
 app.use(function (req, res, next) {

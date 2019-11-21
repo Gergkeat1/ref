@@ -3,7 +3,6 @@ const router = express.Router();
 const crypto = require('crypto');
 const app = express();
 
-
 router.route('/')
     .all((req, res, next) => {
         res.locals.pageData = {
@@ -39,13 +38,14 @@ router.route('/')
                 var mystr = mykey.update(data.pass, 'hex', 'utf8')
                 mystr += mykey.final('utf8');
                 
-                if (mystr == opass) {
+                if (!mystr == opass) {
+                    console.log("Login don't Successfully");
+                    res.redirect('/login');
+                }
+                else {
                     console.log("Login Successfully");
                     var username = data.user ;
                     res.redirect('/dashboard?user=' + username);
-                }
-                else {
-                    console.log("Login don't Successfully");
                 };
 
             });
