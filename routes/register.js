@@ -1,6 +1,7 @@
 const express = require('express')
 const router = express.Router()
 const crypto = require('crypto');
+const User = require("../models/Sequelize");
 const app = express();
 
 router.route('/')
@@ -23,8 +24,6 @@ router.route('/')
             extended: true
         }));
 
-        const conn = require('../connection/con');
-
         const user = req.body.user,
             pass = req.body.pass
         ;
@@ -33,16 +32,33 @@ router.route('/')
         var mystr = mykey.update(pass, 'utf8', 'hex')
         mystr += mykey.final('hex');
 
-        const sql = "INSERT INTO user (user, pass) VALUES ('" + user + "', '" + mystr + "')";
-        console.log("has =",mystr);
-        conn.query(sql, [user, pass], function (err, data) {
-          if (err) {
-            console.log("Error inserted into db", err);
-          } else {
-            console.log("Successfully inserted into db");
-            res.redirect('/login');
-          }
-        });
+        User.create({
+            user: user,
+            pass: mystr
+        }).then(result => {
+            console.log(result.get({
+                plain: true
+            }))
+
+            res.render('pages/login')
+        })
+
+        // const conn = require('../connection/con');
+
+        // var mykey = crypto.createCipher('aes-128-cbc', 'abc');
+        // var mystr = mykey.update(pass, 'utf8', 'hex')
+        // mystr += mykey.final('hex');
+
+        // const sql = "INSERT INTO user (user, pass) VALUES ('" + user + "', '" + mystr + "')";
+        // console.log("has =",mystr);
+        // conn.query(sql, [user, pass], function (err, data) {
+        //   if (err) {
+        //     console.log("Error inserted into db", err);
+        //   } else {
+        //     console.log("Successfully inserted into db");
+        //     res.redirect('/login');
+        //   }
+        // });
     })
 
-module.exports = router ;
+module.exports = router;

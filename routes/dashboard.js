@@ -3,9 +3,9 @@ const router = express.Router()
  
 router.route('/')
     .get((req, res, next) => { 
-        // res.locals.pageData = {
-        //     title:'Dashboard Page'
-        // }
+        res.locals.pageData = {
+            title:'Dashboard Page'
+        }
         var user = req.query.user;
         res.render('pages/dashboard',{
 

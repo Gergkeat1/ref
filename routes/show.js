@@ -1,6 +1,6 @@
 const express = require('express')
 const router = express.Router()
-var User = require("../models/Sequelize");
+const User = require("../models/Sequelize");
  
 router.get('/', function(req, res, next) {
     res.locals.pageData = {
@@ -8,12 +8,18 @@ router.get('/', function(req, res, next) {
     }
     User.findAll().then(result => {
         // var data = JSON.stringify(x, null, 4)
+        result.forEach(function(data) {
+
+            var decyp = data.pass;
+            res.render("pages/show", {
     
-        res.render("pages/show", {
-    
-          result: result
-    
+                result: result,
+                decyp: decyp
+          
+            });
+
         });
+    
     });
 })
  
