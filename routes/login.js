@@ -2,8 +2,8 @@ const express = require('express');
 const router = express.Router();
 const crypto = require('crypto');
 const User = require("../models/Sequelize");
-var passport = require('passport');
 const app = express();
+
 router.route('/')
     .all((req, res, next) => {
         res.locals.pageData = {
@@ -12,6 +12,7 @@ router.route('/')
         next();
     })
     .get((req, res, next) => {
+        req.session.destroy()
         res.render('pages/login')
     })
     .post((req, res, next) => {
@@ -27,32 +28,22 @@ router.route('/')
             where: { user: usersec }
         }).then(result => {
             result.forEach(function (data) {
-                //console.log(data.pass);
                 var mykey = crypto.createDecipher('aes-128-cbc', 'abc');
                 var mystr = mykey.update(data.pass, 'hex', 'utf8')
                 mystr += mykey.final('utf8');
 
-                app.get('/auth/example', passport.authenticate('oauth2'));
-
-                app.get('/auth/example/callback',
-                    passport.authenticate('oauth2', { failureRedirect: '/login' }),
-                    function (req, res) {
-                        // Successful authentication, redirect home.
-                        res.redirect('/');
-                    });
-
-                // if (!mystr == opass) {
-                //     console.log("Login don't Successfully");
-                //     res.redirect('/login');
-                // }
-                // else {
-                //     console.log("Login Successfully");
-                //     var username = data.user;
-                //     res.redirect('/dashboard?user=' + username);
-                // };
+                if (!mystr == opass) {
+                    console.log("Login don't Successfully");
+                    res.redirect('/login');
+                }
+                else {
+                    console.log("Login Successfully");
+                    req.session.user = data;
+                    res.redirect('/dashboard');
+                };
             });
         });
-        console.log();
+
         // const conn = require('../connection/con');
         // const user = req.body.user
         //       opass = req.body.pass
@@ -75,6 +66,7 @@ router.route('/')
         //         };
         //     });
         // });
+
     });
 
 module.exports = router;

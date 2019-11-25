@@ -25,6 +25,7 @@ router.route('/')
         }));
 
         const user = req.body.user,
+            name = req.body.name,
             pass = req.body.pass
         ;
 
@@ -34,6 +35,7 @@ router.route('/')
 
         User.create({
             user: user,
+            name: name,
             pass: mystr
         }).then(result => {
             console.log(result.get({

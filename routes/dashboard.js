@@ -6,10 +6,12 @@ router.route('/')
         res.locals.pageData = {
             title:'Dashboard Page'
         }
-        var user = req.query.user;
+        var user = req.session.user.user;
+        var name = req.session.user.name;
         res.render('pages/dashboard',{
 
-            username: user
+            user: user,
+            name: name
         })    
     })
     .post((req, res, next) => {

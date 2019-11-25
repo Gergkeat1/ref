@@ -12,6 +12,10 @@ module.exports= db.sequelize.define(
             type:Sequelize.STRING,
             // notnull:true
         },
+        name:{
+            type:Sequelize.STRING,
+            // notnull:true
+        },
         pass:{
             type:Sequelize.STRING,
             // notnull:true
