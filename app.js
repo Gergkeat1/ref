@@ -78,6 +78,6 @@ app.use(function (req, res, next) {
     next(err)
 });
 
-app.listen(port, function () {
-    console.log(`Example app listening on port ${port}!`)
-});
+const PORT = process.env.PORT || 5000;
+
+app.listen(PORT, console.log(`Server started on port ${PORT}`));
