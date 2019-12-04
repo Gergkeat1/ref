@@ -13,7 +13,7 @@ router.route('/')
     })
     .get((req, res, next) => {
         req.session.destroy()
-        res.render('pages/login')
+        res.render('pages/login', {layout: false}/*layout false เพื่อไม่เรียก ตัวแปรจาก layout.ejs */)
     })
     .post((req, res, next) => {
         const bodyParser = require('body-parser');
@@ -35,6 +35,7 @@ router.route('/')
                 if (!mystr == opass) {
                     console.log("Login don't Successfully");
                     res.redirect('/login');
+                    
                 }
                 else {
                     console.log("Login Successfully");

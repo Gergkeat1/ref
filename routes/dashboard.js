@@ -12,7 +12,8 @@ router.route('/')
 
             user: user,
             name: name
-        })    
+        })
+           
     })
     .post((req, res, next) => {
         res.locals.pageData = {

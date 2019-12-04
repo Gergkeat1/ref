@@ -1,7 +1,7 @@
 var sequelize = require('sequelize');
 var db={}
 
-var sequelize  = new sequelize("test"/*DBname*/,"root"/*Username*/,""/*Password*/,{
+var sequelize  = new sequelize("test"/*DBname*/,"root"/*Username*/,"root"/*Password*/,{
     host: 'localhost',
     dialect:"mysql",// DBMS ที่จะใช้
     // operatorsAliases: false, //Sequelize v6 ไม่สามารถใช้ได้

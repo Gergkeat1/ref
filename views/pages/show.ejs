@@ -1,6 +1,18 @@
-<table class="table table-bordered">
-  <thead>
-    <tr class="success">
+<html>
+<head>
+    
+    <%- contentFor('header') %>
+    
+    
+    
+</head>
+
+<body>
+
+    <table class="table table-bordered">
+        <thead>
+          <tr class="success">
+
       <th>ID</th>
       <th>Username</th>
       <th>Hash Password</th>
@@ -9,7 +21,7 @@
   </thead>
   <tbody>
     <% result.forEach(function(data) { %>
-    <tr class="success" align="center">
+    <tr align="center" class="success">
       <td><%= data.id %></td>
       <td><%= data.user %></td>
       <td><%= data.pass %></td>
@@ -24,3 +36,6 @@
     <td colspan="6"><a href="/" type="submit" class="btn btn-primary">Back</a></td>
   </tr>
 </table>
+<%- contentFor('footer') %>
+</body>
+</html>

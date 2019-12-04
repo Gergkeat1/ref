@@ -12,7 +12,7 @@ router.route('/')
         next()
     })
     .get((req, res, next) => {
-        res.render('pages/register')
+        res.render('pages/register', {layout: false}/*layout false เพื่อไม่เรียก ตัวแปรจาก layout.ejs */)
     })
     .post((req, res, next) => {
 
