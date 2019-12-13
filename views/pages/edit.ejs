@@ -1,0 +1,32 @@
+<html>
+<head>
+    
+    <%- contentFor('header') %>
+    
+    
+    
+</head>
+
+<body>
+
+
+    <form action="/edit" method="post">
+        
+        <div class="">
+                <h2>Edit</h2><br>
+            <label for="uname"><b>User</b></label>
+            <input type="text" placeholder="Enter User" name="user" required value="<%= user %>">
+            <label for="psw"><b>Name</b></label>
+            <input type="text" placeholder="Enter Name" name="name" required value="<%= name %>">
+            <hr>
+            <input type="hidden" name="id" value="<%= id %>">
+
+            <button type="submit" class="btn btn-success">Save</button>
+            
+            <a href="/show" class="btn btn-primary btn-lg active">Back</a>
+        </div>
+    </form>
+
+<%- contentFor('footer') %>
+</body>
+</html>

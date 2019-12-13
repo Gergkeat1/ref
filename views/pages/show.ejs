@@ -26,7 +26,7 @@
       <td><%= data.user %></td>
       <td><%= data.pass %></td>
       <td>
-        <a href="/b?id=<%= data.id %>"><img src="images/edit.png" width="30" height="30"></a>
+        <a href="/edit?id=<%= data.id %>"><img src="images/edit.png" onclick="return confirm('Do you want to change ??')" width="30" height="30"></a>
         <a href="/delete?id=<%= data.id %>"><img src='images/delete.png' onclick="return confirm('Do you want to Delete ??')" width='30' height='30'></a>
       </td>
     </tr>

@@ -20,6 +20,8 @@ var loginRouter = require('./routes/login');
 var registerRouter = require('./routes/register');
 var dashboardRouter = require('./routes/dashboard');
 var showRouter = require('./routes/show');
+var deleteRouter = require('./routes/delete');
+var editRouter = require('./routes/edit');
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -71,6 +73,8 @@ app.use('/login', loginRouter);
 app.use('/register', registerRouter);
 app.use('/dashboard', dashboardRouter);
 app.use('/show', showRouter);
+app.use('/delete', deleteRouter);
+app.use('/edit', editRouter);
 
 
 // middlewear
